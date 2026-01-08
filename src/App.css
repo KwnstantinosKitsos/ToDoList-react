@@ -5,7 +5,7 @@ body {
   box-sizing: border-box;
 }
 .main-component {
-  max-width: 350px;
+  max-width: 450px;
   margin: 20px auto;
 }
 form {
@@ -43,12 +43,71 @@ form input[type='text']:focus {
   border-radius: 10px;
   display: flex;
   align-items: center;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  transition: opacity 0.2s linear;
+}
+.task-text {
+  padding: 10px;
 }
 div.task svg {
   width: 20px;
   height: auto;
   margin-right: 5px;
+  fill: hsl(202, 100%, 86%);
+  cursor: pointer;
 }
 .checkbox {
   display: flex;
+}
+.delete {
+  display: flex;
+  margin-left: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  padding-left: 5px;
+}
+.delete svg:hover {
+  fill: hsl(0, 100%, 75%);
+  transition: fill 0.3s ease;
+}
+div.task.done {
+  text-decoration: line-through;
+  opacity: 0.35;
+}
+.btn-clear {
+  background-color: beige;
+
+  display: block;
+  margin: 20px auto;
+  background-color: transparent;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.btn-clear:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
+.myH3 {
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+}
+.congrats-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  color: hsl(202, 100%, 86%);
+  font-size: 2rem;
+  white-space: nowrap;
 }
