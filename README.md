@@ -2,6 +2,8 @@
 
 A simple fully functional To-Do application. I built this project to practice React's data management patterns and persistent storage.
 
+**[Live Demo](https://KwnstantinosKitsos.github.io/ToDoList-react/)**
+
 ## Features
 
 - **Add Task:** Quickly add new items to your list via a dynamic form.
