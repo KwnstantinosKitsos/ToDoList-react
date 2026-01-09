@@ -1,16 +1,39 @@
-# React + Vite
+# React TO-DO App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple fully functional To-Do application. I built this project to practice React's data management patterns and persistent storage.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Add Task:** Quickly add new items to your list via a dynamic form.
+- **Edit Task:** Click directly on a task name to switch to edit mode. Press Enter to save.
 
-## React Compiler
+- **Delete Task:** Remove individual tasks with a single click.
+- **Clear All:** A button to wipe the entire list after a confirmation prompt.
+- **Progress Tracking:** A h1 title showing "Completed / Total" tasks.
+- **LocalStorage Save:** The tasks are saved in the browser, so they don't disappear when you refresh the page.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## The Logic
 
-## Expanding the ESLint configuration
+1. **The Source:** All tasks live in one main list in (`allTasks`) within `App.jsx`.
+2. **Data Flow:** The "Parent" (App) passes data down to "Children" (Tasks) via props.
+3. **Lifting State Up:** Children components "signal" updates (like renaming or deleting) back to the parent using callback functions.
+4. **Saving** Every time the list changes, the app automatically updates the LocalStorage so your tasks are safe.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+- **App:** The "brain" that keeps the list and makes everything work.
+- **TaskForm:** The input where you type and add new tasks.
+- **Task:** Each row that shows your task and lets you edit it.
+- **CheckBox:** The visual part that shows if a task is done or not.
+
+## Setup
+
+To run this project locally:
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
