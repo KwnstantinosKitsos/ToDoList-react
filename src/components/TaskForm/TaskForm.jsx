@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import './TaskForm.css';
 export default function TaskForm({ onAdd }) {
   const [taskName, setTaskName] = useState('');
   function handleInputChange(event) {
@@ -8,6 +8,8 @@ export default function TaskForm({ onAdd }) {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    // send to App the task from user
+    if (taskName === '' || taskName.trim() === '') return;
     onAdd(taskName);
     setTaskName('');
   }

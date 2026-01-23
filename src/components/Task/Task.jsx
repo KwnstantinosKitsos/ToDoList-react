@@ -1,9 +1,11 @@
-import Checkbox from './CheckBox';
+import Checkbox from '../CheckBox/CheckBox';
+import './Task.css';
 import { useState } from 'react';
 export default function Task({ name, done, onToggle, onDelete, onRename }) {
   const [editTask, setEditTask] = useState(false);
+  const taskClass = `task ${done ? 'done' : ''}`;
   return (
-    <div className={`task  ${done ? 'done' : ''}`}>
+    <div className={taskClass}>
       <Checkbox checked={done} onClick={() => onToggle(!done)} />
       {!editTask && (
         <span
@@ -17,6 +19,7 @@ export default function Task({ name, done, onToggle, onDelete, onRename }) {
         <form
           onSubmit={(event) => {
             event.preventDefault();
+
             setEditTask(false);
           }}
         >

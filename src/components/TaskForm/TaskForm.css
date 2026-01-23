@@ -1,0 +1,28 @@
+form {
+  display: flex;
+  border: 3px solid hsl(235, 12%, 21%);
+  border-radius: 10px;
+  gap: 6px;
+  padding: 7px;
+}
+form button {
+  background-color: hsl(202, 100%, 86%);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+form input[type='text'] {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 12px;
+  background: none;
+  color: hsl(0, 0%, 100%);
+  display: block;
+  width: 100%;
+}
+form input[type='text']:focus {
+  outline: none;
+  box-shadow: 0 0 4px hsla(0, 0%, 100%, 0.108);
+}

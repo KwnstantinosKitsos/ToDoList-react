@@ -1,4 +1,6 @@
-export default function Checkbox({ checked = false, onClick }) {
+import './CheckBox.css';
+
+export default function Checkbox({ checked, onClick }) {
   return (
     <div onClick={onClick}>
       {!checked && (

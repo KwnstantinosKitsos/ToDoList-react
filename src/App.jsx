@@ -1,6 +1,6 @@
 import './App.css';
-import TaskForm from './TaskForm';
-import Task from './Task';
+import TaskForm from './components/TaskForm/TaskForm';
+import Task from './components/Task/Task';
 import { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 
@@ -11,13 +11,14 @@ function App() {
     const saved = localStorage.getItem('allTasks');
     return saved ? JSON.parse(saved) : [];
   });
-  function addTask(name) {
-    setAllTasks((a) => [...a, { name: name, done: false }]);
-  }
+
   useEffect(() => {
     localStorage.setItem('allTasks', JSON.stringify(allTasks));
   }, [allTasks]);
 
+  function addTask(name) {
+    setAllTasks((a) => [...a, { name: name, done: false }]);
+  }
   function updateTaskDone(indexTask, newDone) {
     setAllTasks((prev) => {
       const newTask = [...prev];
@@ -61,14 +62,18 @@ function App() {
       <TaskForm onAdd={addTask} />
 
       {allTasks.map((allTask, index) => (
-        //spread ops (name={allTask.name}, done={allTask.done})
         <Task
-          {...allTask}
+          //spread props (name={allTask.name}, done={allTask.done})
+          // {...allTask}
+          key={index}
+          name={allTask.name}
+          done={allTask.done}
           onDelete={() => removeTask(index)}
           onToggle={(done) => updateTaskDone(index, done)}
           onRename={(newName) => renameTask(index, newName)}
         />
       ))}
+
       {allTasks.length > 0 && (
         <button className="btn-clear" onClick={clearAllTasks}>
           Clear All Tasks
