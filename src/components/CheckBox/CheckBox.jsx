@@ -1,8 +1,8 @@
 import './CheckBox.css';
 
-export default function Checkbox({ checked, onClick }) {
+export default function Checkbox({ checked, clickDone }) {
   return (
-    <div onClick={onClick}>
+    <div onClick={clickDone}>
       {!checked && (
         <div className="checkbox unchecked">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">

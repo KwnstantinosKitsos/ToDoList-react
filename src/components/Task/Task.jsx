@@ -6,7 +6,7 @@ export default function Task({ name, done, onToggle, onDelete, onRename }) {
   const taskClass = `task ${done ? 'done' : ''}`;
   return (
     <div className={taskClass}>
-      <Checkbox checked={done} onClick={() => onToggle(!done)} />
+      <Checkbox checked={done} clickDone={() => onToggle(!done)} />
       {!editTask && (
         <span
           className="task-text"
