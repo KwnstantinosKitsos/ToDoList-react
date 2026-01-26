@@ -78,17 +78,18 @@ function App() {
       ))}
 
       {allTasks.length > 0 && (
-        <button className="btn-clear" onClick={clearAllTasks}>
-          Clear All Tasks
-        </button>
+        <>
+          <button className="btn-clear" onClick={clearAllTasks}>
+            Clear All Tasks
+          </button>
+          <h3 className="myH3">
+            {allTasks.length > 0 && completeNumber === totalNumber && (
+              <h1 className="congrats-msg">🎉 Congrats! All tasks done! 🎉</h1>
+            )}
+            {completeNumber}/{totalNumber} Complete
+          </h3>
+        </>
       )}
-
-      <h3 className="myH3">
-        {allTasks.length > 0 && completeNumber === totalNumber && (
-          <h1 className="congrats-msg">🎉 Congrats! All tasks done! 🎉</h1>
-        )}
-        {completeNumber}/{totalNumber} Complete
-      </h3>
     </main>
   );
 }
