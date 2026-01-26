@@ -7,7 +7,6 @@ import confetti from 'canvas-confetti';
 function App() {
   //LIFTING THE STATE UP
   const [allTasks, setAllTasks] = useState(() => {
-    //
     const saved = localStorage.getItem('allTasks');
     return saved ? JSON.parse(saved) : [];
   });
@@ -15,15 +14,19 @@ function App() {
   useEffect(() => {
     localStorage.setItem('allTasks', JSON.stringify(allTasks));
   }, [allTasks]);
-
+  // Add Task
   function addTask(name) {
-    setAllTasks((a) => [...a, { name: name, done: false }]);
+    setAllTasks((prev) => [
+      ...prev,
+      { name: name, done: false, id: crypto.randomUUID() },
+    ]);
   }
-  function updateTaskDone(indexTask, newDone) {
+  // Change Done
+  function updateTaskDone(idTask, newDone) {
     setAllTasks((prev) => {
-      const newTask = [...prev];
-      newTask[indexTask].done = newDone;
-      return newTask;
+      return prev.map((task) =>
+        task.id === idTask ? { ...task, done: newDone } : task,
+      );
     });
   }
 
@@ -38,19 +41,20 @@ function App() {
         origin: { y: 0.6 },
       });
     }
-  }, [completeNumber, totalNumber, allTasks.length]);
-
-  function removeTask(indexToRemove) {
-    setAllTasks((prev) => prev.filter((_, index) => index !== indexToRemove));
+  }, [completeNumber, totalNumber]);
+  // Remove Task
+  function removeTask(idToRemove) {
+    setAllTasks((prev) => prev.filter((task) => task.id !== idToRemove));
   }
-
-  function renameTask(index, newName) {
+  // Edit Task
+  function renameTask(idToRename, newName) {
     setAllTasks((prev) => {
-      const newTasks = [...prev];
-      newTasks[index].name = newName;
-      return newTasks;
+      return prev.map((task) =>
+        task.id === idToRename ? { ...task, name: newName } : task,
+      );
     });
   }
+  // Clear all Tasks
   function clearAllTasks() {
     const confirmed = window.confirm('You want to clear all the Tasks?');
     if (confirmed) {
@@ -61,16 +65,15 @@ function App() {
     <main className="main-component">
       <TaskForm onAdd={addTask} />
 
-      {allTasks.map((allTask, index) => (
+      {allTasks.map((allTask) => (
         <Task
-          //spread props (name={allTask.name}, done={allTask.done})
-          // {...allTask}
-          key={index}
+          key={allTask.id}
+          id={allTask.id}
           name={allTask.name}
           done={allTask.done}
-          onDelete={() => removeTask(index)}
-          onToggle={(done) => updateTaskDone(index, done)}
-          onRename={(newName) => renameTask(index, newName)}
+          toDelete={(id) => removeTask(id)}
+          toToggle={(id, done) => updateTaskDone(id, done)}
+          toRename={(id, newName) => renameTask(id, newName)}
         />
       ))}
 
