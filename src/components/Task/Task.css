@@ -37,3 +37,21 @@ div.task.done {
   text-decoration: line-through;
   opacity: 0.35;
 }
+
+/* ---- ----- */
+.task-edit-input {
+  width: 100%;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid hsla(0, 0%, 100%, 0.15);
+  background: hsla(0, 0%, 100%, 0.05);
+  color: white;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.task-edit-input:focus {
+  border: 1px solid rgba(120, 200, 255, 0.8);
+  background: rgba(120, 200, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(120, 200, 255, 0.25);
+}

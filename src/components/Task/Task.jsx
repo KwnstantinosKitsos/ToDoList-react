@@ -1,9 +1,28 @@
 import Checkbox from '../CheckBox/CheckBox';
 import './Task.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 export default function Task({ id, name, done, toToggle, toDelete, toRename }) {
   const [editTask, setEditTask] = useState(false);
+  const [draft, setDraft] = useState(name);
+
   const taskClass = `task ${done ? 'done' : ''}`;
+
+  useEffect(() => {
+    if (editTask) {
+      setDraft(name);
+    }
+  }, [name, editTask]);
+
+  function handleEditSubmit(event) {
+    event.preventDefault();
+    if (draft.length === 0 || draft.trim() === '') {
+      setDraft(name);
+      setEditTask(false);
+      return;
+    }
+    toRename(id, draft);
+    setEditTask(false);
+  }
   return (
     <div className={taskClass}>
       <Checkbox checked={done} clickDone={() => toToggle(id, !done)} />
@@ -16,18 +35,14 @@ export default function Task({ id, name, done, toToggle, toDelete, toRename }) {
         </span>
       )}
       {editTask && (
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-
-            setEditTask(false);
-          }}
-        >
+        <form onSubmit={handleEditSubmit}>
           <input
+            className="task-edit-input"
             type="text"
-            value={name}
-            onChange={(event) => toRename(id, event.target.value)}
-            onBlur={() => setEditTask(false)}
+            value={draft}
+            onChange={(event) => setDraft(event.target.value)}
+            onBlur={handleEditSubmit}
+            autoFocus
           />
         </form>
       )}

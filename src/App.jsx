@@ -62,35 +62,40 @@ function App() {
     }
   }
   return (
-    <main className="main-component">
-      <TaskForm onAdd={addTask} />
+    <>
+      <main className="main-component">
+        <h1 className="myH1">Task List</h1>
+        <TaskForm onAdd={addTask} />
 
-      {allTasks.map((allTask) => (
-        <Task
-          key={allTask.id}
-          id={allTask.id}
-          name={allTask.name}
-          done={allTask.done}
-          toDelete={(id) => removeTask(id)}
-          toToggle={(id, done) => updateTaskDone(id, done)}
-          toRename={(id, newName) => renameTask(id, newName)}
-        />
-      ))}
+        {allTasks.map((allTask) => (
+          <Task
+            key={allTask.id}
+            id={allTask.id}
+            name={allTask.name}
+            done={allTask.done}
+            toDelete={(id) => removeTask(id)}
+            toToggle={(id, done) => updateTaskDone(id, done)}
+            toRename={(id, newName) => renameTask(id, newName)}
+          />
+        ))}
 
-      {allTasks.length > 0 && (
-        <>
-          <button className="btn-clear" onClick={clearAllTasks}>
-            Clear All Tasks
-          </button>
-          <h3 className="myH3">
-            {allTasks.length > 0 && completeNumber === totalNumber && (
-              <h1 className="congrats-msg">🎉 Congrats! All tasks done! 🎉</h1>
-            )}
-            {completeNumber}/{totalNumber} Complete
-          </h3>
-        </>
-      )}
-    </main>
+        {allTasks.length > 0 && (
+          <>
+            <button className="btn-clear" onClick={clearAllTasks}>
+              Clear All Tasks
+            </button>
+            <h3 className="myH3">
+              {allTasks.length > 0 && completeNumber === totalNumber && (
+                <h1 className="congrats-msg">
+                  🎉 Congrats! All tasks done! 🎉
+                </h1>
+              )}
+              {completeNumber}/{totalNumber} Complete
+            </h3>
+          </>
+        )}
+      </main>
+    </>
   );
 }
 
